@@ -3,15 +3,25 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "plugin:jest/recommended",
+    "prettier"
   ],
-  "plugins": ["@typescript-eslint", "import"],
-  "env": { "node": true, "es6": true },
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
+  "env": {
+    "node": true,
+    "es6": true
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["**/__test__/**"]
+  "settings": {
+    "jest": {
+      "version": 29
+    }
+  }
 }
