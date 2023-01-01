@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   asyncSumOfArray,
   asyncSumOfArraySometimesZero,
+  getFirstNameThrowIfLong,
   sumOfArray,
 } from "../functions";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { NameApiService } from "../nameApiService";
 import { DatabaseMock } from "../util";
 
 describe("sumOfArray", () => {
@@ -62,6 +64,27 @@ describe("asyncSumOfArraySometimesZero", () => {
   });
 });
 
+jest.mock("../nameApiService");
+
 describe("getFirstNameThrowIfLong", () => {
-  //
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it("maxNameLengthが取得したFirstNameより長いとき、firstNameが返される", () => {
+    const mockGetFirstName = jest.fn().mockReturnValue("John");
+    (NameApiService as jest.Mock) = jest.fn().mockReturnValue({
+      getFirstName: mockGetFirstName,
+    });
+    return expect(getFirstNameThrowIfLong(10)).resolves.toBe("John");
+  });
+  it("maxNameLengthが取得したFirstNameより短いとき、エラーがthrowされる", () => {
+    const mockGetFirstName = jest.fn().mockReturnValue("John");
+    (NameApiService as jest.Mock) = jest.fn().mockReturnValue({
+      getFirstName: mockGetFirstName,
+    });
+    return expect(getFirstNameThrowIfLong(2)).rejects.toThrow(
+      "first_name too long"
+    );
+  });
 });
