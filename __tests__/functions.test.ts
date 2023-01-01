@@ -1,4 +1,10 @@
-import { asyncSumOfArray, sumOfArray } from "../functions";
+import {
+  asyncSumOfArray,
+  asyncSumOfArraySometimesZero,
+  sumOfArray,
+} from "../functions";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { DatabaseMock } from "../util";
 
 describe("sumOfArray", () => {
   it("配列の要素の合計を正しく返す", () => {
@@ -30,8 +36,30 @@ describe("asyncSumOfArray", () => {
   });
 });
 
+jest.mock("../util/index");
+
 describe("asyncSumOfArraySometimesZero", () => {
-  //
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+  it("databaseに値を保存できたらsumOfArray(numbers)をresolveする", async () => {
+    const mockSave = jest.fn();
+    (DatabaseMock as jest.Mock) = jest.fn().mockReturnValue({
+      save: mockSave,
+    });
+    await expect(asyncSumOfArraySometimesZero([1, 2, 3])).resolves.toBe(6);
+    expect(mockSave).toHaveBeenCalledWith([1, 2, 3]);
+  });
+  it('エラーが発生したら"0"をresolveする', async () => {
+    const mockSave = jest.fn().mockImplementation(() => {
+      throw new Error("mock error");
+    });
+    (DatabaseMock as jest.Mock) = jest.fn().mockReturnValue({
+      save: mockSave,
+    });
+    await expect(asyncSumOfArraySometimesZero([1, 2, 3])).resolves.toBe(0);
+    expect(mockSave).toHaveBeenCalledWith([1, 2, 3]);
+  });
 });
 
 describe("getFirstNameThrowIfLong", () => {
