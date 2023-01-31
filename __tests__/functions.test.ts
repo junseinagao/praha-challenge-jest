@@ -4,9 +4,9 @@ import {
   asyncSumOfArraySometimesZero,
   getFirstNameThrowIfLong,
   sumOfArray,
-} from "../functions";
-import { NameApiService } from "../nameApiService";
-import { DatabaseMock } from "../util";
+} from "../src/functions";
+import { NameApiService } from "../src/nameApiService";
+import { DatabaseMock } from "../src/util";
 
 describe("sumOfArray", () => {
   it("配列の要素の合計を正しく返す", () => {
@@ -26,7 +26,7 @@ describe("asyncSumOfArray", () => {
   });
 });
 
-jest.mock("../util/index");
+jest.mock("../src/util/index");
 
 describe("asyncSumOfArraySometimesZero", () => {
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe("asyncSumOfArraySometimesZero", () => {
   });
 });
 
-jest.mock("../nameApiService");
+jest.mock("../src/nameApiService");
 
 describe("getFirstNameThrowIfLong", () => {
   beforeEach(() => {

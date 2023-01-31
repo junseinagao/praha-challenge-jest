@@ -2,6 +2,7 @@ import axios from "axios";
 
 export class NameApiService {
   private MAX_LENGTH = 4;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   public constructor() {}
 
   public async getFirstName(): Promise<string> {
