@@ -1,5 +1,5 @@
 import * as script from "../src/script";
-const command = script.default;
+const { default: command, add, subtract, multiply, divide } = script;
 
 describe("command", () => {
   beforeEach(() => {
@@ -9,29 +9,29 @@ describe("command", () => {
     it("node dist/script.js add 1 2 のとき足し算が行われる", () => {
       const spy = jest.spyOn(script, "add");
       command(["node", "dist/script.js", "add", "1", "2"]);
-      expect(spy).toBeCalledWith(["1", "2"]);
+      expect(spy).toBeCalledWith("1", "2");
     });
     it("node dist/script.js subtract 1 2 のとき引き算が行われる", () => {
       const spy = jest.spyOn(script, "subtract");
       command(["node", "dist/script.js", "subtract", "1", "2"]);
-      expect(spy).toBeCalledWith(["1", "2"]);
+      expect(spy).toBeCalledWith("1", "2");
     });
     it("node dist/script.js multiply 1 2 のときかけ算が行われる", () => {
       const spy = jest.spyOn(script, "multiply");
       command(["node", "dist/script.js", "multiply", "1", "2"]);
-      expect(spy).toBeCalledWith(["1", "2"]);
+      expect(spy).toBeCalledWith("1", "2");
     });
     it("node dist/script.js divide 1 2 のとき割り算が行われる", () => {
       const spy = jest.spyOn(script, "divide");
       command(["node", "dist/script.js", "divide", "1", "2"]);
-      expect(spy).toBeCalledWith(["1", "2"]);
+      expect(spy).toBeCalledWith("1", "2");
     });
   });
 });
 
 describe("add", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
-    // expect(add(3, 10, 3)).toBe(16);
+    expect(add("3", "10", "3")).toBe(16);
   });
   it("引数が数字以外だとエラーが発生する", () => {
     //
@@ -42,7 +42,7 @@ describe("add", () => {
 });
 describe("subtract", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
-    //
+    expect(subtract("10", "3")).toBe(7);
   });
   it("引数が数字以外だとエラーが発生する", () => {
     //
@@ -51,6 +51,7 @@ describe("subtract", () => {
 });
 describe("multiply", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
+    expect(multiply("3", "10", "3")).toBe(90);
     //
   });
   it("引数が数字以外だとエラーが発生する", () => {
@@ -62,7 +63,7 @@ describe("multiply", () => {
 });
 describe("divide", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
-    //
+    expect(divide("100", "10")).toBe(10);
   });
   it("引数が数字以外だとエラーが発生する", () => {
     //

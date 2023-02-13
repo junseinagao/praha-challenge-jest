@@ -1,32 +1,47 @@
-const command = (args: string[]): void => {
+const command = (args: string[]): number | void => {
   const [_, __, op, ...props] = args;
   switch (op) {
     case "add":
-      add(props);
-      break;
+      return add(...props);
     case "subtract":
-      subtract(props);
-      break;
+      return subtract(...props);
     case "multiply":
-      multiply(props);
-      break;
+      return multiply(...props);
     case "divide":
-      divide(props);
-      break;
+      return divide(...props);
   }
 };
 
-export const add = (props: string[]) => {
-  //no-op
+export const add = (...props: string[]) => {
+  let result = 0;
+  for (const num of props) {
+    result += Number(num);
+  }
+  return result;
 };
-export const subtract = (props: string[]) => {
-  //no-op
+export const subtract = (...props: string[]) => {
+  const [first, ...others] = props;
+  let result = Number(first);
+  for (const num of others) {
+    result -= Number(num);
+  }
+  return result;
 };
-export const multiply = (props: string[]) => {
-  //no-op
+export const multiply = (...props: string[]) => {
+  const [first, ...others] = props;
+  let result = Number(first);
+  for (const num of others) {
+    result = result * Number(num);
+  }
+  return result;
 };
-export const divide = (props: string[]) => {
-  //no-op
+export const divide = (...props: string[]) => {
+  const [first, ...others] = props;
+  let result = Number(first);
+  for (const num of others) {
+    result = result / Number(num);
+  }
+  return result;
 };
 
 export default command;
