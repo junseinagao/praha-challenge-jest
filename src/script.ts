@@ -1,4 +1,4 @@
-const command = (args: string[]): number | void => {
+const command = (args: string[]): string | number | void => {
   const [_, __, op, ...props] = args;
   if (props.length > 30) throw new Error("Can't get over 30 arguments.");
   if (props.some((prop) => Number.isNaN(Number(prop))))
@@ -20,6 +20,9 @@ export const add = (...props: string[]) => {
   for (const num of props) {
     result += Number(num);
   }
+  if (result > 1000) {
+    return "too big";
+  }
   return result;
 };
 export const subtract = (...props: string[]) => {
@@ -28,6 +31,9 @@ export const subtract = (...props: string[]) => {
   for (const num of others) {
     result -= Number(num);
   }
+  if (result < 0) {
+    return "negative number";
+  }
   return result;
 };
 export const multiply = (...props: string[]) => {
@@ -35,6 +41,9 @@ export const multiply = (...props: string[]) => {
   let result = Number(first);
   for (const num of others) {
     result = result * Number(num);
+  }
+  if (result > 1000) {
+    return "big big number";
   }
   return result;
 };

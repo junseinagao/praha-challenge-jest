@@ -126,39 +126,28 @@ describe("add", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
     expect(add("3", "10", "3")).toBe(16);
   });
-  it("引数が数字以外だとエラーが発生する", () => {
-    //
-  });
   it("計算結果が 1000 を超える場合は合計ではなく「too big」と文字列が返る", () => {
-    //
+    expect(add("1000", "1")).toMatch("too big");
   });
 });
 describe("subtract", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
     expect(subtract("10", "3")).toBe(7);
   });
-  it("引数が数字以外だとエラーが発生する", () => {
-    //
+  it("引き算の場合、計算結果がマイナスの場合は「negative number」と文字列が返る", () => {
+    expect(subtract("1", "10")).toMatch("negative number");
   });
-  it("引き算の場合、計算結果がマイナスの場合は「negative number」と文字列が返る", () => {});
 });
 describe("multiply", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
     expect(multiply("3", "10", "3")).toBe(90);
-    //
-  });
-  it("引数が数字以外だとエラーが発生する", () => {
-    //
   });
   it("計算結果が 1000 を越える場合は「big big number」と文字列が返る", () => {
-    //
+    expect(multiply("100", "11")).toMatch("big big number");
   });
 });
 describe("divide", () => {
   it("渡された引数に対して計算を行い、結果を返す", () => {
     expect(divide("100", "10")).toBe(10);
-  });
-  it("引数が数字以外だとエラーが発生する", () => {
-    //
   });
 });
