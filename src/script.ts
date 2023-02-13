@@ -1,6 +1,8 @@
 const command = (args: string[]): number | void => {
   const [_, __, op, ...props] = args;
   if (props.length > 30) throw new Error("Can't get over 30 arguments.");
+  if (props.some((prop) => Number.isNaN(Number(prop))))
+    throw new Error("Can't get non number value.");
   switch (op) {
     case "add":
       return add(...props);
