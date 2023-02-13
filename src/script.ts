@@ -1,5 +1,6 @@
 const command = (args: string[]): number | void => {
   const [_, __, op, ...props] = args;
+  if (props.length > 30) throw new Error("Can't get over 30 arguments.");
   switch (op) {
     case "add":
       return add(...props);
